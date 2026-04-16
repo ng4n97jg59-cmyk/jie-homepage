@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>杰主人</title>
+    <title>杰主人 · 龙虾军团指挥部</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -26,10 +26,8 @@
         .hero::before {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
             background: radial-gradient(circle at 30% 50%, #667eea22 0%, transparent 50%),
                         radial-gradient(circle at 70% 50%, #764ba222 0%, transparent 50%);
             animation: float 20s ease-in-out infinite;
@@ -56,277 +54,126 @@
             50% { background-position: 200% center; }
         }
         .tagline { font-size: 1.3rem; color: #888; margin-bottom: 30px; }
-        .nav {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 30px;
-        }
+        .nav { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-bottom: 30px; }
         .nav a {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
+            display: inline-flex; align-items: center; gap: 8px;
             padding: 14px 28px;
-            background: #ffffff08;
-            border: 1px solid #ffffff15;
-            border-radius: 12px;
-            color: #e0e0e0;
-            text-decoration: none;
-            font-size: 1rem;
-            transition: all 0.3s;
+            background: #ffffff08; border: 1px solid #ffffff15;
+            border-radius: 12px; color: #e0e0e0; text-decoration: none;
+            font-size: 1rem; transition: all 0.3s;
         }
         .nav a:hover {
-            background: #667eea20;
-            border-color: #667eea;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px #667eea22;
+            background: #667eea20; border-color: #667eea;
+            transform: translateY(-3px); box-shadow: 0 10px 30px #667eea22;
         }
         .status {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
+            display: inline-flex; align-items: center; gap: 8px;
             padding: 8px 16px;
-            background: #00d4ff15;
-            border: 1px solid #00d4ff30;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            color: #00d4ff;
+            background: #00d4ff15; border: 1px solid #00d4ff30;
+            border-radius: 20px; font-size: 0.85rem; color: #00d4ff;
             margin-bottom: 25px;
         }
         .status-dot {
-            width: 8px; height: 8px;
-            background: #00d4ff;
-            border-radius: 50%;
-            animation: pulse 2s ease-in-out infinite;
+            width: 8px; height: 8px; background: #00d4ff;
+            border-radius: 50%; animation: pulse 2s ease-in-out infinite;
         }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
-        }
-        .scroll-hint {
-            color: #555;
-            font-size: 0.85rem;
-            animation: bounce 2s ease-in-out infinite;
-        }
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(8px); }
-        }
-        .section {
-            padding: 80px 20px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        .section h2 {
-            font-size: 2rem;
-            margin-bottom: 10px;
-            text-align: center;
-            color: #fff;
-        }
-        .section-desc {
-            text-align: center;
-            color: #666;
-            margin-bottom: 40px;
-            font-size: 0.95rem;
-        }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+        .scroll-hint { color: #555; font-size: 0.85rem; animation: bounce 2s ease-in-out infinite; }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
+
+        .section { padding: 80px 20px; max-width: 1000px; margin: 0 auto; }
+        .section h2 { font-size: 2rem; margin-bottom: 10px; text-align: center; color: #fff; }
+        .section-desc { text-align: center; color: #666; margin-bottom: 40px; font-size: 0.95rem; }
         .divider-line {
             width: 60px; height: 3px;
             background: linear-gradient(90deg, #667eea, #764ba2);
-            margin: 0 auto 30px;
-            border-radius: 2px;
+            margin: 0 auto 30px; border-radius: 2px;
         }
 
-        /* Shrimp Cards */
-        .shrimp-card {
-            background: #ffffff08;
-            border: 1px solid #ffffff10;
-            border-radius: 20px;
-            padding: 35px;
-            margin-bottom: 30px;
+        /* Agent Cards */
+        .agent-card {
+            background: #ffffff08; border: 1px solid #ffffff10;
+            border-radius: 20px; padding: 35px; margin-bottom: 30px;
             transition: all 0.3s;
         }
-        .shrimp-card:hover {
-            border-color: #667eea40;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-        }
-        .shrimp-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-        .shrimp-icon { font-size: 3rem; }
-        .shrimp-header h3 {
-            color: #fff;
-            font-size: 1.4rem;
-        }
-        .shrimp-header .shrimp-role {
-            font-size: 0.8rem;
-            color: #667eea;
-            margin-top: 2px;
-        }
-        .shrimp-desc {
-            color: #999;
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
+        .agent-card:hover { border-color: #667eea40; box-shadow: 0 10px 40px rgba(0,0,0,0.2); }
+        .agent-card.commander { border-color: #ff6b6b30; }
+        .agent-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+        .agent-icon { font-size: 3rem; }
+        .agent-header h3 { color: #fff; font-size: 1.4rem; }
+        .agent-header .agent-role { font-size: 0.8rem; color: #667eea; margin-top: 2px; }
+        .agent-desc { color: #999; font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px; }
         .sub-title {
-            font-size: 0.8rem;
-            color: #666;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-bottom: 12px;
-            font-weight: 600;
+            font-size: 0.8rem; color: #666; text-transform: uppercase;
+            letter-spacing: 1.5px; margin-bottom: 12px; font-weight: 600;
         }
-        .skills-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 20px;
-        }
+        .skills-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
         .skill-tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            padding: 6px 14px;
-            background: #ffffff08;
-            border: 1px solid #ffffff12;
-            border-radius: 20px;
-            font-size: 0.82rem;
-            color: #ccc;
-            transition: all 0.2s;
+            display: inline-flex; align-items: center; gap: 5px;
+            padding: 6px 14px; background: #ffffff08;
+            border: 1px solid #ffffff12; border-radius: 20px;
+            font-size: 0.82rem; color: #ccc; transition: all 0.2s;
         }
-        .skill-tag:hover {
-            background: #667eea20;
-            border-color: #667eea50;
-            color: #fff;
+        .skill-tag:hover { background: #667eea20; border-color: #667eea50; color: #fff; }
+        .skill-cat {
+            color: #555; font-size: 0.75rem; text-transform: uppercase;
+            letter-spacing: 1px; margin: 12px 0 8px; font-weight: 600;
         }
-        .tasks-timeline {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
+        .tasks-timeline { display: flex; flex-direction: column; gap: 10px; }
         .task-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 16px;
-            background: #ffffff05;
-            border-radius: 12px;
-            border: 1px solid #ffffff08;
+            display: flex; align-items: center; gap: 12px;
+            padding: 12px 16px; background: #ffffff05;
+            border-radius: 12px; border: 1px solid #ffffff08;
         }
         .task-time {
-            min-width: 55px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: #00d4ff;
-            font-family: "Fira Code", monospace;
+            min-width: 55px; font-size: 0.85rem; font-weight: 700;
+            color: #00d4ff; font-family: "Fira Code", monospace;
         }
-        .task-name {
-            flex: 1;
-            font-size: 0.9rem;
-            color: #ddd;
-        }
-        .task-badge {
-            font-size: 0.7rem;
-            padding: 3px 10px;
-            border-radius: 10px;
-            font-weight: 600;
-        }
+        .task-name { flex: 1; font-size: 0.9rem; color: #ddd; }
+        .task-badge { font-size: 0.7rem; padding: 3px 10px; border-radius: 10px; font-weight: 600; }
         .task-badge.active { background: #00d4ff20; color: #00d4ff; }
         .task-badge.weekday { background: #7b2cbf20; color: #b388ff; }
         .task-badge.daily { background: #ff6b6b20; color: #ff8a80; }
+        .task-badge.weekday-sat { background: #ffd93d20; color: #ffd93d; }
 
-        /* Timeline Section */
-        .timeline-section { margin-top: 50px; }
-        .timeline-section h2 { margin-bottom: 10px; }
-        .full-timeline {
-            position: relative;
-            padding-left: 30px;
-        }
+        /* Timeline */
+        .full-timeline { position: relative; padding-left: 30px; }
         .full-timeline::before {
-            content: '';
-            position: absolute;
-            left: 8px;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(180deg, #667eea, #764ba2, #ff6b6b);
+            content: ''; position: absolute; left: 8px; top: 0; bottom: 0;
+            width: 2px; background: linear-gradient(180deg, #667eea, #764ba2, #ff6b6b, #00d4ff);
             border-radius: 1px;
         }
-        .timeline-item {
-            position: relative;
-            margin-bottom: 25px;
-        }
+        .timeline-item { position: relative; margin-bottom: 25px; }
         .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -26px;
-            top: 16px;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: #667eea;
-            border: 2px solid #0f0f23;
+            content: ''; position: absolute; left: -26px; top: 16px;
+            width: 10px; height: 10px; border-radius: 50%;
+            background: #667eea; border: 2px solid #0f0f23;
         }
         .timeline-item:nth-child(2)::before { background: #7b2cbf; }
-        .timeline-item:nth-child(3)::before { background: #00d4ff; }
-        .timeline-item:nth-child(4)::before { background: #ff6b6b; }
+        .timeline-item:nth-child(3)::before { background: #ff6b6b; }
+        .timeline-item:nth-child(4)::before { background: #00d4ff; }
         .timeline-item:nth-child(5)::before { background: #ffd93d; }
         .timeline-item:nth-child(6)::before { background: #6bcb77; }
-        .tl-time {
-            font-size: 0.85rem;
-            color: #667eea;
-            font-weight: 700;
-            font-family: "Fira Code", monospace;
-            margin-bottom: 4px;
-        }
-        .tl-content {
-            background: #ffffff08;
-            border: 1px solid #ffffff10;
-            border-radius: 12px;
-            padding: 14px 18px;
-        }
+        .tl-time { font-size: 0.85rem; color: #667eea; font-weight: 700; font-family: "Fira Code", monospace; margin-bottom: 4px; }
+        .tl-content { background: #ffffff08; border: 1px solid #ffffff10; border-radius: 12px; padding: 14px 18px; }
         .tl-title { color: #fff; font-size: 0.95rem; margin-bottom: 4px; }
         .tl-desc { color: #888; font-size: 0.82rem; }
         .tl-tags { margin-top: 6px; display: flex; gap: 6px; flex-wrap: wrap; }
-        .tl-tag {
-            font-size: 0.7rem;
-            padding: 2px 8px;
-            border-radius: 8px;
-            background: #ffffff10;
-            color: #aaa;
-        }
+        .tl-tag { font-size: 0.7rem; padding: 2px 8px; border-radius: 8px; background: #ffffff10; color: #aaa; }
 
-        /* Tech Stack */
-        .tech-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-        }
+        /* Tech */
+        .tech-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; }
         .tech-card {
-            background: #ffffff08;
-            border: 1px solid #ffffff10;
-            border-radius: 16px;
-            padding: 25px;
-            text-align: center;
-            transition: all 0.3s;
+            background: #ffffff08; border: 1px solid #ffffff10;
+            border-radius: 16px; padding: 25px; text-align: center; transition: all 0.3s;
         }
-        .tech-card:hover {
-            border-color: #667eea40;
-            transform: translateY(-3px);
-        }
+        .tech-card:hover { border-color: #667eea40; transform: translateY(-3px); }
         .tech-icon { font-size: 2.5rem; margin-bottom: 12px; }
         .tech-card h4 { color: #fff; margin-bottom: 6px; font-size: 1rem; }
         .tech-card p { color: #888; font-size: 0.82rem; line-height: 1.5; }
 
         .footer {
-            text-align: center;
-            padding: 40px;
-            color: #555;
-            font-size: 0.85rem;
+            text-align: center; padding: 40px; color: #555; font-size: 0.85rem;
             border-top: 1px solid #ffffff10;
         }
         .footer a { color: #667eea; text-decoration: none; }
@@ -340,7 +187,7 @@
             <p class="tagline">AI 能力架构师 · 信息降噪指挥官</p>
             <div class="status">
                 <span class="status-dot"></span>
-                龙虾军团运行中 · 6 项定时任务
+                龙虾军团运行中 · 6 项定时任务 · 105 项技能就绪
             </div>
             <nav class="nav">
                 <a href="markdown-guide.html">📝 Markdown 教程</a>
@@ -350,149 +197,227 @@
         </div>
     </div>
 
-    <!-- 龙虾军团 -->
+    <!-- ========== 指挥官：小杰虾 ========== -->
     <div class="section">
-        <h2>🦐 龙虾军团</h2>
-        <p class="section-desc">指挥官 + 四虾 · 分层智能协作体系</p>
+        <h2>🎮 指挥官</h2>
+        <p class="section-desc">统一调度 · 全局协调 · 系统运维</p>
         <div class="divider-line"></div>
 
-        <!-- 杰金复盘虾 -->
-        <div class="shrimp-card">
-            <div class="shrimp-header">
-                <span class="shrimp-icon">📊</span>
+        <div class="agent-card commander">
+            <div class="agent-header">
+                <span class="agent-icon">🦐</span>
                 <div>
-                    <h3>杰金复盘虾</h3>
-                    <div class="shrimp-role">金融交易 / 复盘分析</div>
+                    <h3>小杰虾</h3>
+                    <div class="agent-role">指挥官 / 系统运维 / 全局调度</div>
                 </div>
             </div>
-            <div class="shrimp-desc">每日三时段覆盖 A 股全交易日，从开盘到收盘全程追踪，合并上证指数与综合市场分析。</div>
-            <div class="sub-title">🛠 Skills</div>
-            <div class="skills-grid">
-                <span class="skill-tag">📈 stock-analysis</span>
-                <span class="skill-tag">📉 stock-monitor</span>
-                <span class="skill-tag">🔍 stock-watcher</span>
-                <span class="skill-tag">📋 stock-review</span>
-                <span class="skill-tag">🔎 stock-research-engine</span>
-                <span class="skill-tag">💹 tushare-finance</span>
-                <span class="skill-tag">📡 stock-monitor-skill</span>
-                <span class="skill-tag">📰 market-news-analyst</span>
-                <span class="skill-tag">🔎 multi-search-engine</span>
-                <span class="skill-tag">✅ skill-vetter</span>
-            </div>
-            <div class="sub-title">⏰ Tasks</div>
-            <div class="tasks-timeline">
-                <div class="task-item">
-                    <span class="task-time">09:31</span>
-                    <span class="task-name">A股早盘分析</span>
-                    <span class="task-badge weekday">工作日</span>
-                </div>
-                <div class="task-item">
-                    <span class="task-time">12:41</span>
-                    <span class="task-name">A股午间报告</span>
-                    <span class="task-badge weekday">工作日</span>
-                </div>
-                <div class="task-item">
-                    <span class="task-time">15:01</span>
-                    <span class="task-name">A股收盘总结</span>
-                    <span class="task-badge weekday">工作日</span>
-                </div>
-            </div>
-        </div>
+            <div class="agent-desc">军团核心大脑，负责调度四虾协作、管理定时任务、维护系统基础设施、处理用户交互。</div>
 
-        <!-- 杰金新闻虾 -->
-        <div class="shrimp-card">
-            <div class="shrimp-header">
-                <span class="shrimp-icon">📰</span>
-                <div>
-                    <h3>杰金新闻虾</h3>
-                    <div class="shrimp-role">财经新闻 / 资讯追踪</div>
-                </div>
+            <div class="sub-title">🛠 Skills (45+)</div>
+            <div class="skill-cat">☁️ 云服务 & 基建</div>
+            <div class="skills-grid">
+                <span class="skill-tag">☁️ tencent-cos-skill</span>
+                <span class="skill-tag">🖥️ tencentcloud-lighthouse</span>
+                <span class="skill-tag">📄 tencent-docs</span>
+                <span class="skill-tag">📹 tencent-meeting</span>
+                <span class="skill-tag">🐙 openclaw-github-assistant</span>
+                <span class="skill-tag">🔌 api-gateway</span>
+                <span class="skill-tag">🔧 mcp-builder</span>
             </div>
-            <div class="shrimp-desc">每日早间资讯速递，整合全球财经新闻与港股/A股/美股市场动态，四种风格随机轮换。</div>
-            <div class="sub-title">🛠 Skills</div>
+            <div class="skill-cat">🔍 搜索 & 资讯</div>
             <div class="skills-grid">
                 <span class="skill-tag">🔍 tavily-search</span>
-                <span class="skill-tag">🌐 multi-search-engine</span>
-                <span class="skill-tag">📰 market-news-analyst</span>
-                <span class="skill-tag">📡 stock-monitor</span>
-                <span class="skill-tag">📉 stock-monitor-skill</span>
-                <span class="skill-tag">🔎 stock-research-engine</span>
-                <span class="skill-tag">📈 stock-analysis</span>
-                <span class="skill-tag">💹 tushare-finance</span>
-                <span class="skill-tag">🔍 stock-watcher</span>
-                <span class="skill-tag">✅ skill-vetter</span>
+                <span class="skill-tag">🦋 brave-search</span>
+                <span class="skill-tag">🌏 cn-search</span>
+                <span class="skill-tag">🔎 multi-search-engine</span>
             </div>
+            <div class="skill-cat">🧠 智能核心</div>
+            <div class="skills-grid">
+                <span class="skill-tag">🧠 proactive-agent</span>
+                <span class="skill-tag">📈 self-improving</span>
+                <span class="skill-tag">💾 memory-manager</span>
+                <span class="skill-tag">🧹 memory-hygiene</span>
+                <span class="skill-tag">📊 model-usage</span>
+                <span class="skill-tag">📝 summarize</span>
+            </div>
+            <div class="skill-cat">📄 文档 & 媒体</div>
+            <div class="skills-grid">
+                <span class="skill-tag">📄 pdf</span>
+                <span class="skill-tag">📊 docx</span>
+                <span class="skill-tag">📰 pptx</span>
+                <span class="skill-tag">📗 xlsx</span>
+                <span class="skill-tag">🖼️ nano-pdf</span>
+                <span class="skill-tag">🎬 video-frames</span>
+                <span class="skill-tag">🎤 openai-whisper</span>
+            </div>
+            <div class="skill-cat">🎨 创作 & 开发</div>
+            <div class="skills-grid">
+                <span class="skill-tag">🎨 algorithmic-art</span>
+                <span class="skill-tag">🖼️ canvas-design</span>
+                <span class="skill-tag">🌐 frontend-design</span>
+                <span class="skill-tag">🏗️ web-artifacts-builder</span>
+                <span class="skill-tag">🌐 webapp-testing</span>
+                <span class="skill-tag">🎯 theme-factory</span>
+            </div>
+            <div class="skill-cat">💬 沟通 & 企业微信</div>
+            <div class="skills-grid">
+                <span class="skill-tag">👥 wecom-contact-lookup</span>
+                <span class="skill-tag">📋 wecom-doc</span>
+                <span class="skill-tag">✅ wecom-edit-todo</span>
+                <span class="skill-tag">📅 wecom-schedule</span>
+                <span class="skill-tag">🤝 wecom-meeting-create</span>
+            </div>
+
             <div class="sub-title">⏰ Tasks</div>
             <div class="tasks-timeline">
                 <div class="task-item">
                     <span class="task-time">08:00</span>
-                    <span class="task-name">起床 + 资讯速递</span>
-                    <span class="task-badge daily">每日</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- 杰金情绪虾 -->
-        <div class="shrimp-card">
-            <div class="shrimp-header">
-                <span class="shrimp-icon">😏</span>
-                <div>
-                    <h3>杰金情绪虾</h3>
-                    <div class="shrimp-role">市场情绪 / 逆向分析</div>
-                </div>
-            </div>
-            <div class="shrimp-desc">追踪市场情绪指标，在群体狂热与恐慌中捕捉逆向信号，辅助决策判断。</div>
-            <div class="sub-title">🛠 Skills</div>
-            <div class="skills-grid">
-                <span class="skill-tag">😊 market-sentiment</span>
-                <span class="skill-tag">📰 news-sentiment-analysis</span>
-                <span class="skill-tag">📊 volume-price-analysis</span>
-                <span class="skill-tag">📈 stock-analysis</span>
-                <span class="skill-tag">🔍 multi-search-engine</span>
-                <span class="skill-tag">🔎 stock-research-engine</span>
-                <span class="skill-tag">✅ skill-vetter</span>
-            </div>
-            <div class="sub-title">⏰ Tasks</div>
-            <div class="tasks-timeline">
-                <div class="task-item">
-                    <span class="task-time">—</span>
-                    <span class="task-name">待部署</span>
-                    <span class="task-badge" style="background:#ffd93d20;color:#ffd93d;">规划中</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- 杰币虾 -->
-        <div class="shrimp-card">
-            <div class="shrimp-header">
-                <span class="shrimp-icon">🪙</span>
-                <div>
-                    <h3>杰币虾</h3>
-                    <div class="shrimp-role">加密货币 / 投资决策</div>
-                </div>
-            </div>
-            <div class="shrimp-desc">监控加密货币市场，追踪 BTC/ETH 等主流币种价格走势与市场热点，辅助数字资产投资决策。</div>
-            <div class="sub-title">🛠 Skills</div>
-            <div class="skills-grid">
-                <span class="skill-tag">🪙 ac-stock-ultrashort</span>
-                <span class="skill-tag">⚡ freeride</span>
-                <span class="skill-tag">📈 stock-analysis</span>
-                <span class="skill-tag">📊 stock-watcher</span>
-                <span class="skill-tag">🔍 multi-search-engine</span>
-                <span class="skill-tag">✅ skill-vetter</span>
-            </div>
-            <div class="sub-title">⏰ Tasks</div>
-            <div class="tasks-timeline">
-                <div class="task-item">
-                    <span class="task-time">08:30</span>
-                    <span class="task-name">杰币虾早报 · BTC/ETH + 市场热点</span>
+                    <span class="task-name">起床 + 资讯速递（四风格轮换 + 香港天气）</span>
                     <span class="task-badge daily">每日</span>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 每日时间线 -->
+    <!-- ========== 龙虾军团 ========== -->
+    <div class="section">
+        <h2>🦐 龙虾军团</h2>
+        <p class="section-desc">四虾并行 · 各司其职</p>
+        <div class="divider-line"></div>
+
+        <!-- 杰金复盘虾 -->
+        <div class="agent-card">
+            <div class="agent-header">
+                <span class="agent-icon">📊</span>
+                <div>
+                    <h3>杰金复盘虾</h3>
+                    <div class="agent-role">金融交易 / 复盘分析 / 行情追踪</div>
+                </div>
+            </div>
+            <div class="agent-desc">每日三时段覆盖 A 股全交易日，从开盘到收盘全程追踪，使用 AkShare 免费数据源获取行情、涨跌停、板块数据。</div>
+            <div class="sub-title">🛠 Skills (10)</div>
+            <div class="skills-grid">
+                <span class="skill-tag">📈 stock-analysis</span>
+                <span class="skill-tag">📉 stock-monitor-skill</span>
+                <span class="skill-tag">🔍 stock-watcher</span>
+                <span class="skill-tag">📋 stock-review</span>
+                <span class="skill-tag">🔎 stock-research-engine</span>
+                <span class="skill-tag">💹 tushare-finance</span>
+                <span class="skill-tag">📡 akshare-stock</span>
+                <span class="skill-tag">🌐 akshare-api</span>
+                <span class="skill-tag">📰 market-news-analyst</span>
+                <span class="skill-tag">🔎 multi-search-engine</span>
+            </div>
+            <div class="sub-title">⏰ Tasks</div>
+            <div class="tasks-timeline">
+                <div class="task-item">
+                    <span class="task-time">09:31</span>
+                    <span class="task-name">A股早盘分析（指数 + 涨跌停 + 热点）</span>
+                    <span class="task-badge weekday">工作日</span>
+                </div>
+                <div class="task-item">
+                    <span class="task-time">12:41</span>
+                    <span class="task-name">A股午间报告（半日走势 + 板块动态）</span>
+                    <span class="task-badge weekday">工作日</span>
+                </div>
+                <div class="task-item">
+                    <span class="task-time">15:01</span>
+                    <span class="task-name">A股收盘总结（全天复盘 + 资金面）</span>
+                    <span class="task-badge weekday">工作日</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 杰金新闻虾 -->
+        <div class="agent-card">
+            <div class="agent-header">
+                <span class="agent-icon">📰</span>
+                <div>
+                    <h3>杰金新闻虾</h3>
+                    <div class="agent-role">财经新闻 / 资讯追踪 / 全球视野</div>
+                </div>
+            </div>
+            <div class="agent-desc">每日早间资讯速递，整合全球财经新闻与港股/A股/美股市场动态，配合 Tavily AI 搜索引擎实时抓取热点。四种风格随机轮换，拒绝鸡汤。</div>
+            <div class="sub-title">🛠 Skills (6)</div>
+            <div class="skills-grid">
+                <span class="skill-tag">🔍 tavily-search</span>
+                <span class="skill-tag">🌐 multi-search-engine</span>
+                <span class="skill-tag">🌏 cn-search</span>
+                <span class="skill-tag">🦋 brave-search</span>
+                <span class="skill-tag">📰 market-news-analyst</span>
+                <span class="skill-tag">☀️ weather</span>
+            </div>
+            <div class="sub-title">⏰ Tasks</div>
+            <div class="tasks-timeline">
+                <div class="task-item">
+                    <span class="task-time">08:00</span>
+                    <span class="task-name">资讯速递 + 香港天气（配合指挥官起床推送）</span>
+                    <span class="task-badge daily">每日</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 杰金情绪虾 -->
+        <div class="agent-card">
+            <div class="agent-header">
+                <span class="agent-icon">😏</span>
+                <div>
+                    <h3>杰金情绪虾</h3>
+                    <div class="agent-role">市场情绪 / 逆向分析 / 信号捕捉</div>
+                </div>
+            </div>
+            <div class="agent-desc">追踪市场情绪指标与资金流向，在群体狂热与恐慌中捕捉逆向信号，通过量价分析辅助决策判断。</div>
+            <div class="sub-title">🛠 Skills (7)</div>
+            <div class="skills-grid">
+                <span class="skill-tag">😊 market-sentiment</span>
+                <span class="skill-tag">📰 news-sentiment-analysis</span>
+                <span class="skill-tag">📊 volume-price-analysis</span>
+                <span class="skill-tag">📈 stock-analysis</span>
+                <span class="skill-tag">🔎 stock-research-engine</span>
+                <span class="skill-tag">🔎 multi-search-engine</span>
+                <span class="skill-tag">🏆 a-stock-leader-identification</span>
+            </div>
+            <div class="sub-title">⏰ Tasks</div>
+            <div class="tasks-timeline">
+                <div class="task-item">
+                    <span class="task-time">—</span>
+                    <span class="task-name">待部署（情绪日报 / 异常波动提醒）</span>
+                    <span class="task-badge" style="background:#ffd93d20;color:#ffd93d;">规划中</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 杰币虾 -->
+        <div class="agent-card">
+            <div class="agent-header">
+                <span class="agent-icon">🪙</span>
+                <div>
+                    <h3>杰币虾</h3>
+                    <div class="agent-role">加密货币 / 投资决策 / 市场监控</div>
+                </div>
+            </div>
+            <div class="agent-desc">监控加密货币市场，追踪 BTC/ETH 等主流币种价格走势与市场热点，通过多引擎搜索获取实时行情，辅助数字资产投资决策。</div>
+            <div class="sub-title">🛠 Skills (6)</div>
+            <div class="skills-grid">
+                <span class="skill-tag">⚡ ac-stock-ultrashort</span>
+                <span class="skill-tag">🏄 free-ride</span>
+                <span class="skill-tag">🪙 fusionalpha-acrypto-desk</span>
+                <span class="skill-tag">📈 stock-analysis</span>
+                <span class="skill-tag">🔍 stock-watcher</span>
+                <span class="skill-tag">🔎 multi-search-engine</span>
+            </div>
+            <div class="sub-title">⏰ Tasks</div>
+            <div class="tasks-timeline">
+                <div class="task-item">
+                    <span class="task-time">08:30</span>
+                    <span class="task-name">杰币虾早报 · BTC/ETH 价格 + 市场热点</span>
+                    <span class="task-badge daily">每日</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== 每日时间线 ========== -->
     <div class="section">
         <h2>📅 每日任务时间线</h2>
         <p class="section-desc">从早到晚，信息自动流转</p>
@@ -503,7 +428,7 @@
                 <div class="tl-content">
                     <div class="tl-title">🌙 美股收盘报告</div>
                     <div class="tl-desc">隔夜美股行情 · 道指 / 标普500 / 纳斯达克</div>
-                    <div class="tl-tags"><span class="tl-tag">周二至周六</span></div>
+                    <div class="tl-tags"><span class="tl-tag">周二至周六</span><span class="tl-tag">Tavily Search</span></div>
                 </div>
             </div>
             <div class="timeline-item">
@@ -511,7 +436,7 @@
                 <div class="tl-content">
                     <div class="tl-title">☀️ 起床 + 资讯速递</div>
                     <div class="tl-desc">四风格轮换 · 全球财经资讯 · 香港天气</div>
-                    <div class="tl-tags"><span class="tl-tag">杰金新闻虾</span><span class="tl-tag">每日</span></div>
+                    <div class="tl-tags"><span class="tl-tag">每日</span><span class="tl-tag">小杰虾 + 杰金新闻虾</span></div>
                 </div>
             </div>
             <div class="timeline-item">
@@ -519,37 +444,37 @@
                 <div class="tl-content">
                     <div class="tl-title">🪙 杰币虾早报</div>
                     <div class="tl-desc">BTC / ETH 价格 · 加密货币市场热点</div>
-                    <div class="tl-tags"><span class="tl-tag">杰币虾</span><span class="tl-tag">每日</span></div>
+                    <div class="tl-tags"><span class="tl-tag">每日</span><span class="tl-tag">杰币虾</span><span class="tl-tag">Tavily Search</span></div>
                 </div>
             </div>
             <div class="timeline-item">
                 <div class="tl-time">09:31</div>
                 <div class="tl-content">
                     <div class="tl-title">📊 A股早盘分析</div>
-                    <div class="tl-desc">上证指数 + 综合市场 · 涨跌停 · 资金流向</div>
-                    <div class="tl-tags"><span class="tl-tag">杰金复盘虾</span><span class="tl-tag">工作日</span></div>
+                    <div class="tl-desc">指数行情 + 涨跌停统计 + 市场热点</div>
+                    <div class="tl-tags"><span class="tl-tag">工作日</span><span class="tl-tag">杰金复盘虾</span><span class="tl-tag">AkShare</span></div>
                 </div>
             </div>
             <div class="timeline-item">
                 <div class="tl-time">12:41</div>
                 <div class="tl-content">
                     <div class="tl-title">📡 A股午间报告</div>
-                    <div class="tl-desc">上午盘面总结 · 半日走势分析</div>
-                    <div class="tl-tags"><span class="tl-tag">杰金复盘虾</span><span class="tl-tag">工作日</span></div>
+                    <div class="tl-desc">上午盘面总结 · 半日走势分析 · 板块动态</div>
+                    <div class="tl-tags"><span class="tl-tag">工作日</span><span class="tl-tag">杰金复盘虾</span><span class="tl-tag">AkShare</span></div>
                 </div>
             </div>
             <div class="timeline-item">
                 <div class="tl-time">15:01</div>
                 <div class="tl-content">
                     <div class="tl-title">🏁 A股收盘总结</div>
-                    <div class="tl-desc">全天行情回顾 · 板块复盘 · 资金面总结</div>
-                    <div class="tl-tags"><span class="tl-tag">杰金复盘虾</span><span class="tl-tag">工作日</span></div>
+                    <div class="tl-desc">全天行情复盘 · 板块总结 · 资金面分析</div>
+                    <div class="tl-tags"><span class="tl-tag">工作日</span><span class="tl-tag">杰金复盘虾</span><span class="tl-tag">AkShare</span></div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 技术栈 -->
+    <!-- ========== 技术栈 ========== -->
     <div class="section">
         <h2>🛠️ 技术栈</h2>
         <p class="section-desc">双云双活 · 全球可达</p>
@@ -577,8 +502,13 @@
             </div>
             <div class="tech-card">
                 <div class="tech-icon">🐍</div>
+                <h4>AkShare</h4>
+                <p>A 股免费数据源<br>行情 + 财务数据</p>
+            </div>
+            <div class="tech-card">
+                <div class="tech-icon">💹</div>
                 <h4>Tushare</h4>
-                <p>A 股数据接口<br>行情 + 财务数据</p>
+                <p>A 股量化数据<br>备选数据源</p>
             </div>
         </div>
     </div>
@@ -586,6 +516,7 @@
     <footer class="footer">
         <p>Built with 🦐 by 小杰虾 · Powered by OpenClaw</p>
         <p style="margin-top:8px;">Hosted on <a href="https://pages.github.com">GitHub Pages</a> + <a href="https://cloud.tencent.com/product/cos">腾讯云 COS</a></p>
+        <p style="margin-top:8px;color:#444;">Last updated: 2026-04-16</p>
     </footer>
 </body>
 </html>
