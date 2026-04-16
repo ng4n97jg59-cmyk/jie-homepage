@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown 在线编辑器</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #0f0f23;
+            color: #e0e0e0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .toolbar {
+            background: #1a1a2e;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 1px solid #333;
+            flex-wrap: wrap;
+        }
+        .toolbar h1 {
+            font-size: 1.1rem;
+            background: linear-gradient(90deg, #00d4ff, #7b2cbf);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-right: auto;
+        }
+        .btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+        .btn:hover { background: #5a6fd6; transform: translateY(-1px); }
+        .btn-outline {
+            background: transparent;
+            border: 1px solid #667eea;
+            color: #667eea;
+        }
+        .btn-outline:hover { background: #667eea15; }
+        .lang-switch {
+            display: flex;
+            gap: 5px;
+        }
+        .lang-btn {
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: 1px solid #444;
+            background: transparent;
+            color: #888;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+        .lang-btn.active {
+            border-color: #667eea;
+            color: #667eea;
+            background: #667eea15;
+        }
+        .editor-container {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+        }
+        .pane {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .pane-header {
+            background: #16213e;
+            padding: 10px 20px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #888;
+            border-bottom: 1px solid #333;
+        }
+        #editor {
+            flex: 1;
+            background: #1a1a2e;
+            color: #e0e0e0;
+            border: none;
+            resize: none;
+            padding: 20px;
+            font-family: "Fira Code", "Consolas", monospace;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            outline: none;
+            tab-size: 4;
+        }
+        #preview {
+            flex: 1;
+            background: #fff;
+            color: #333;
+            padding: 20px;
+            overflow-y: auto;
+            line-height: 1.8;
+        }
+        .divider {
+            width: 3px;
+            background: #333;
+            cursor: col-resize;
+            transition: background 0.2s;
+        }
+        .divider:hover { background: #667eea; }
+        /* Preview Styles */
+        #preview h1 { font-size: 2rem; margin: 20px 0 15px; color: #1a1a2e; border-bottom: 2px solid #667eea; padding-bottom: 10px; }
+        #preview h2 { font-size: 1.5rem; margin: 18px 0 12px; color: #16213e; }
+        #preview h3 { font-size: 1.2rem; margin: 15px 0 10px; color: #333; }
+        #preview p { margin: 12px 0; }
+        #preview ul, #preview ol { margin: 10px 0 10px 25px; }
+        #preview li { margin: 6px 0; }
+        #preview blockquote { border-left: 4px solid #667eea; padding: 10px 20px; margin: 15px 0; background: #f5f7ff; color: #555; }
+        #preview code { background: #f0f0f0; padding: 2px 8px; border-radius: 4px; font-family: "Fira Code", monospace; font-size: 0.9em; }
+        #preview pre { background: #1a1a2e; color: #00d4ff; padding: 20px; border-radius: 10px; overflow-x: auto; margin: 15px 0; }
+        #preview pre code { background: none; color: inherit; padding: 0; }
+        #preview a { color: #667eea; }
+        #preview img { max-width: 100%; border-radius: 10px; }
+        #preview table { border-collapse: collapse; width: 100%; margin: 15px 0; }
+        #preview th, #preview td { border: 1px solid #ddd; padding: 10px 15px; text-align: left; }
+        #preview th { background: #667eea; color: white; }
+        #preview tr:nth-child(even) { background: #f9f9f9; }
+        #preview hr { border: none; border-top: 2px solid #eee; margin: 20px 0; }
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #667eea;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            transition: transform 0.3s;
+            z-index: 999;
+        }
+        .toast.show { transform: translateX(-50%) translateY(0); }
+        @media (max-width: 768px) {
+            .editor-container { flex-direction: column; }
+            .divider { width: 100%; height: 3px; cursor: row-resize; }
+        }
+    </style>
+</head>
+<body>
+    <div class="toolbar">
+        <h1>📝 Markdown Live Editor</h1>
+        <div class="lang-switch">
+            <button class="lang-btn active" onclick="switchLang('zh')">中文</button>
+            <button class="lang-btn" onclick="switchLang('en')">EN</button>
+        </div>
+        <button class="btn" onclick="loadTemplate()">📋 模板</button>
+        <button class="btn" onclick="copyHTML()">📤 复制 HTML</button>
+        <button class="btn btn-outline" onclick="downloadMD()">💾 下载 .md</button>
+        <button class="btn btn-outline" onclick="window.open('index.html')">📖 教程</button>
+    </div>
+    
+    <div class="editor-container">
+        <div class="pane">
+            <div class="pane-header" data-zh="✏️ 编辑" data-en="✏️ Editor">✏️ 编辑</div>
+            <textarea id="editor" spellcheck="false" data-zh-placeholder="在这里输入 Markdown..." data-en-placeholder="Type Markdown here..."></textarea>
+        </div>
+        <div class="divider"></div>
+        <div class="pane">
+            <div class="pane-header" data-zh="👁️ 预览" data-en="👁️ Preview">👁️ 预览</div>
+            <div id="preview"></div>
+        </div>
+    </div>
+    
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        const editor = document.getElementById('editor');
+        const preview = document.getElementById('preview');
+        const toast = document.getElementById('toast');
+        
+        const templates = {
+            zh: `# 📝 Markdown 示例
+
+## 基础语法
+
+这是一段普通文本。你可以用 **粗体**、*斜体*、~~删除线~~ 和 \`行内代码\` 来丰富格式。
+
+## 列表
+
+### 无序列表
+- 🦐 第一点
+- 🦞 第二点
+- 🦀 第三点
+
+### 有序列表
+1. 打开编辑器
+2. 输入 Markdown
+3. 实时查看效果
+
+## 引用
+
+> Markdown 让写作回归纯粹。
+> 专注于内容，而非排版。
+
+## 代码块
+
+\`\`\`javascript
+function hello() {
+    console.log("Hello, Markdown!");
+}
+\`\`\`
+
+## 表格
+
+| 功能 | 支持 | 说明 |
+|------|:----:|------|
+| 标题 | ✅ | 一到六级 |
+| 列表 | ✅ | 有序/无序 |
+| 链接 | ✅ | 图片/超链接 |
+| 代码 | ✅ | 行内/代码块 |
+
+## 链接
+
+访问 [GitHub](https://github.com) 了解更多。
+
+---
+
+*用 Live Editor 实时编辑这段内容吧！*`,
+            en: `# 📝 Markdown Demo
+
+## Basic Syntax
+
+This is a paragraph with **bold**, *italic*, ~~strikethrough~~ and \`inline code\`.
+
+## Lists
+
+### Unordered
+- 🦐 First item
+- 🦞 Second item
+- 🦀 Third item
+
+### Ordered
+1. Open the editor
+2. Type Markdown
+3. See live preview
+
+## Blockquote
+
+> Markdown makes writing pure again.
+> Focus on content, not formatting.
+
+## Code Block
+
+\`\`\`python
+def hello():
+    print("Hello, Markdown!")
+\`\`\`
+
+## Table
+
+| Feature | Supported | Note |
+|---------|:---------:|------|
+| Headers | ✅ | H1-H6 |
+| Lists | ✅ | Ordered/Unordered |
+| Links | ✅ | Images/Hyperlinks |
+| Code | ✅ | Inline/Block |
+
+---
+
+*Edit this content live!*`
+        };
+        
+        let currentLang = 'zh';
+        
+        // Init
+        editor.value = templates.zh;
+        updatePreview();
+        updatePlaceholder();
+        
+        editor.addEventListener('input', updatePreview);
+        
+        // Tab support
+        editor.addEventListener('keydown', (e) => {
+            if (e.key === 'Tab') {
+                e.preventDefault();
+                const start = editor.selectionStart;
+                editor.value = editor.value.substring(0, start) + '    ' + editor.value.substring(editor.selectionEnd);
+                editor.selectionStart = editor.selectionEnd = start + 4;
+                updatePreview();
+            }
+        });
+        
+        function updatePreview() {
+            preview.innerHTML = marked.parse(editor.value);
+        }
+        
+        function loadTemplate() {
+            editor.value = templates[currentLang];
+            updatePreview();
+            showToast(currentLang === 'zh' ? '模板已加载' : 'Template loaded');
+        }
+        
+        function copyHTML() {
+            navigator.clipboard.writeText(marked.parse(editor.value)).then(() => {
+                showToast(currentLang === 'zh' ? 'HTML 已复制到剪贴板' : 'HTML copied!');
+            });
+        }
+        
+        function downloadMD() {
+            const blob = new Blob([editor.value], { type: 'text/markdown' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'document.md';
+            a.click();
+            showToast(currentLang === 'zh' ? '文件已下载' : 'File downloaded');
+        }
+        
+        function switchLang(lang) {
+            currentLang = lang;
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            document.querySelector(`.lang-btn[onclick="switchLang('${lang}')"]`).classList.add('active');
+            updatePlaceholder();
+            document.querySelectorAll('[data-zh]').forEach(el => {
+                el.textContent = el.getAttribute(`data-${lang}`);
+            });
+        }
+        
+        function updatePlaceholder() {
+            editor.placeholder = editor.getAttribute(`data-${currentLang}-placeholder`);
+        }
+        
+        function showToast(msg) {
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2000);
+        }
+    </script>
+</body>
+</html>

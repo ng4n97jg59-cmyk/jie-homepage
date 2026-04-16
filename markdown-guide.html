@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown 是什么？</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #00d4ff, #7b2cbf);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .content {
+            padding: 50px 40px;
+        }
+        
+        h2 {
+            color: #1a1a2e;
+            font-size: 1.8rem;
+            margin: 40px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        h2:first-child {
+            margin-top: 0;
+        }
+        
+        p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea15, #764ba215);
+            border-left: 4px solid #667eea;
+            padding: 25px;
+            border-radius: 0 10px 10px 0;
+            margin: 25px 0;
+        }
+        
+        .code-block {
+            background: #1a1a2e;
+            color: #00d4ff;
+            padding: 25px;
+            border-radius: 12px;
+            overflow-x: auto;
+            font-family: "Fira Code", "Consolas", monospace;
+            font-size: 0.95rem;
+            margin: 20px 0;
+            position: relative;
+        }
+        
+        .code-block::before {
+            content: "Markdown";
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 0.75rem;
+            color: #888;
+            text-transform: uppercase;
+        }
+        
+        .preview {
+            background: white;
+            border: 2px solid #e0e0e0;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+        
+        .preview h1, .preview h2, .preview h3 {
+            border-bottom: none;
+            margin: 10px 0;
+        }
+        
+        .side-by-side {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .side-by-side {
+                grid-template-columns: 1fr;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+        
+        .label {
+            font-size: 0.8rem;
+            color: #888;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        ul, ol {
+            margin: 15px 0 15px 30px;
+        }
+        
+        li {
+            margin: 10px 0;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .feature-card {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        
+        .feature-card h3 {
+            color: #1a1a2e;
+            margin-bottom: 10px;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .comparison-table th {
+            background: #1a1a2e;
+            color: white;
+        }
+        
+        .comparison-table tr:hover {
+            background: #f5f5f5;
+        }
+        
+        .footer {
+            background: #1a1a2e;
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin: 5px;
+        }
+        
+        a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="hero">
+            <h1>📝 Markdown</h1>
+            <p>一种让写作回归纯粹的轻量级标记语言</p>
+        </header>
+        
+        <div class="content">
+            <h2>📖 什么是 Markdown？</h2>
+            <p>Markdown 是一种轻量级标记语言，由 John Gruber 在 2004 年创建。它的设计目标是实现「易读易写」——让你用纯文本格式编写文档，然后转换成结构化的 HTML（或其他格式）。</p>
+            
+            <div class="highlight-box">
+                <strong>核心理念：</strong>Markdown 的语法设计尽可能贴近纯文本的自然书写习惯，让未经过渲染的原文也具有良好的可读性。
+            </div>
+            
+            <h2>✨ 为什么选择 Markdown？</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>简单易学</h3>
+                    <p>10 分钟就能掌握基本语法，无需复杂工具</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔓</div>
+                    <h3>纯文本格式</h3>
+                    <p>任何文本编辑器都能打开，永不过时</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>专注内容</h3>
+                    <p>不用纠结排版，把精力放在写作上</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3>随处可用</h3>
+                    <p>GitHub、Notion、Typora 等平台原生支持</p>
+                </div>
+            </div>
+            
+            <h2>🎨 基础语法示例</h2>
+            
+            <h3>标题</h3>
+            <div class="side-by-side">
+                <div>
+                    <div class="label">Markdown 代码</div>
+                    <div class="code-block"># 一级标题
+## 二级标题
+### 三级标题</div>
+                </div>
+                <div>
+                    <div class="label">渲染效果</div>
+                    <div class="preview">
+                        <h1 style="font-size:1.5rem;">一级标题</h1>
+                        <h2 style="font-size:1.3rem;">二级标题</h2>
+                        <h3 style="font-size:1.1rem;">三级标题</h3>
+                    </div>
+                </div>
+            </div>
+            
+            <h3>文本格式</h3>
+            <div class="side-by-side">
+                <div>
+                    <div class="label">Markdown 代码</div>
+                    <div class="code-block">**粗体文本**
+*斜体文本*
+~~删除线~~
+`行内代码`</div>
+                </div>
+                <div>
+                    <div class="label">渲染效果</div>
+                    <div class="preview">
+                        <p><strong>粗体文本</strong></p>
+                        <p><em>斜体文本</em></p>
+                        <p><del>删除线</del></p>
+                        <p><code style="background:#f0f0f0;padding:2px 6px;border-radius:3px;">行内代码</code></p>
+                    </div>
+                </div>
+            </div>
+            
+            <h3>列表</h3>
+            <div class="side-by-side">
+                <div>
+                    <div class="label">Markdown 代码</div>
+                    <div class="code-block">- 项目 A
+- 项目 B
+- 项目 C
+
+1. 第一步
+2. 第二步
+3. 第三步</div>
+                </div>
+                <div>
+                    <div class="label">渲染效果</div>
+                    <div class="preview">
+                        <ul>
+                            <li>项目 A</li>
+                            <li>项目 B</li>
+                            <li>项目 C</li>
+                        </ul>
+                        <ol>
+                            <li>第一步</li>
+                            <li>第二步</li>
+                            <li>第三步</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            
+            <h3>链接与图片</h3>
+            <div class="side-by-side">
+                <div>
+                    <div class="label">Markdown 代码</div>
+                    <div class="code-block">[点击访问](https://example.com)
+![图片描述](image.jpg)</div>
+                </div>
+                <div>
+                    <div class="label">渲染效果</div>
+                    <div class="preview">
+                        <p><a href="#">点击访问</a></p>
+                        <p>📷 图片会在这里显示</p>
+                    </div>
+                </div>
+            </div>
+            
+            <h3>代码块</h3>
+            <div class="code-block">```python
+def hello():
+    print("Hello, Markdown!")
+```</div>
+            
+            <h3>引用</h3>
+            <div class="side-by-side">
+                <div>
+                    <div class="label">Markdown 代码</div>
+                    <div class="code-block">> 这是一段引用文字
+> 可以有多行</div>
+                </div>
+                <div>
+                    <div class="label">渲染效果</div>
+                    <div class="preview">
+                        <blockquote style="border-left:3px solid #667eea;padding-left:15px;color:#666;">
+                            这是一段引用文字<br>可以有多行
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+            
+            <h2>🏢 谁在使用 Markdown？</h2>
+            <div style="text-align:center;margin:20px 0;">
+                <span class="tag">GitHub</span>
+                <span class="tag">Notion</span>
+                <span class="tag">Typora</span>
+                <span class="tag">VS Code</span>
+                <span class="tag">WordPress</span>
+                <span class="tag">Reddit</span>
+                <span class="tag">Stack Overflow</span>
+                <span class="tag">Discord</span>
+            </div>
+            
+            <h2>📊 Markdown vs 其他格式</h2>
+            <table class="comparison-table">
+                <tr>
+                    <th>特性</th>
+                    <th>Markdown</th>
+                    <th>Word</th>
+                    <th>HTML</th>
+                </tr>
+                <tr>
+                    <td>学习难度</td>
+                    <td>⭐ 极低</td>
+                    <td>⭐⭐ 中等</td>
+                    <td>⭐⭐⭐ 较高</td>
+                </tr>
+                <tr>
+                    <td>文件大小</td>
+                    <td>极小</td>
+                    <td>较大</td>
+                    <td>中等</td>
+                </tr>
+                <tr>
+                    <td>版本控制</td>
+                    <td>✅ 友好</td>
+                    <td>❌ 困难</td>
+                    <td>✅ 友好</td>
+                </tr>
+                <tr>
+                    <td>跨平台</td>
+                    <td>✅ 完美</td>
+                    <td>⚠️ 需兼容</td>
+                    <td>✅ 完美</td>
+                </tr>
+                <tr>
+                    <td>阅读体验</td>
+                    <td>✅ 无需渲染也可读</td>
+                    <td>❌ 需专用软件</td>
+                    <td>⚠️ 标签干扰阅读</td>
+                </tr>
+            </table>
+            
+            <h2>🚀 快速开始</h2>
+            <ol>
+                <li><strong>选择编辑器</strong>：VS Code、Typora、Obsidian 或任何文本编辑器</li>
+                <li><strong>新建文件</strong>：创建以 <code>.md</code> 为后缀的文件</li>
+                <li><strong>开始写作</strong>：使用本文介绍的语法编写内容</li>
+                <li><strong>实时预览</strong>：大多数编辑器支持分屏预览</li>
+            </ol>
+            
+            <div class="highlight-box">
+                <strong>💡 小提示：</strong>本页面就是用 Markdown 编写的，然后转换成 HTML 呈现给你。你也可以轻松创建这样的网页！
+            </div>
+        </div>
+        
+        <footer class="footer">
+            <p>📝 Markdown — 让写作回归纯粹</p>
+            <p style="font-size:0.9rem;opacity:0.7;margin-top:10px;">Made with ❤️ by 小杰虾</p>
+        </footer>
+    </div>
+</body>
+</html>
