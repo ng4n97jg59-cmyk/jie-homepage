@@ -490,9 +490,9 @@
                 <p>所有任务消息<br>直接推送到手机</p>
             </div>
             <div class="tech-card">
-                <div class="tech-icon">📤</div>
-                <h4>agent 自主投递</h4>
-                <p>心跳自动检测<br>每 10 分钟巡检<br>主 session 直推微信</p>
+                <div class="tech-icon">⚙️</div>
+                <h4>推送守护进程</h4>
+                <p>systemd 常驻服务<br>每 120 秒扫描产出<br>自动检测推送 · 去重标记</p>
             </div>
         </div>
     </div>
@@ -608,9 +608,10 @@
                 <p>国内加速<br>灾备双活</p>
             </div>
             <div class="tech-card">
-                <div class="tech-icon">💓</div>
-                <h4>心跳投递</h4>
-                <p>cron 产出文件<br>心跳每 10 分钟检测<br>主 session message 工具直推</p>
+                <div class="tech-icon">⚙️</div>
+                <h4>推送守护进程</h4>
+                <p>systemd 常驻服务<br>2 分钟检查间隔<br>自动推送 + 去重标记</p>
+                <p style="font-size:0.7rem;color:#666;margin-top:4px;">cron→产出文件→<br>守护进程→微信</p>
             </div>
             <div class="tech-card">
                 <div class="tech-icon">🐍</div>
@@ -628,7 +629,7 @@
     <footer class="footer">
         <p>Built with 🦐 by 小杰虾 · Powered by OpenClaw</p>
         <p style="margin-top:8px;">Hosted on <a href="https://pages.github.com">GitHub Pages</a> + <a href="https://cloud.tencent.com/product/cos">腾讯云 COS</a></p>
-        <p style="margin-top:8px;color:#444;">Last updated: 2026-05-06 13:30 (心跳机制 · 投递重构 · 频率10分钟)</p>
+        <p style="margin-top:8px;color:#444;">Last updated: 2026-05-11 23:00 (守护进程 · 指数实时化 · 日线→Sina实时快照)</p>
     </footer>
 </body>
 </html>
